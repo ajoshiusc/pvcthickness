@@ -47,7 +47,7 @@ def main():
     print(f['Age'][0][:2])
     print(f['Age'][0][3:])
 
-    pool = Pool(processes=4)
+    pool = Pool(processes=8)
 
     hcpsubs = list([])
 
