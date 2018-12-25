@@ -23,7 +23,7 @@ def parfun1(sub):
 
     # compute 1mm downsampled image
     system('flirt -in ' + t1file + ' -ref ' + t1file + ' -out ' + outt1 +
-           ' -applyisoxfm 1')
+           ' -applyisoxfm 1 >/dev/null 2>&1')
 
     # generate mask
     msk = compute_background_mask(outt1)
@@ -34,9 +34,9 @@ def parfun1(sub):
 
     system(
         '/big_disk/ajoshi/coding_ground/pvcthickness/cortical_extraction_nobse.sh '
-        + join(subdir, 't1'))
+        + join(subdir, 't1') + ' >/dev/null 2>&1')
     system('/home/ajoshi/BrainSuite18a/svreg/bin/svreg.sh ' +
-           join(subdir, 't1') + ' -S')
+           join(subdir, 't1') + ' -S >/dev/null 2>&1')
 
 
 def main():
