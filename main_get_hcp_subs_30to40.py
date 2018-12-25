@@ -36,7 +36,7 @@ def parfun1(sub):
         '/big_disk/ajoshi/coding_ground/pvcthickness/cortical_extraction_nobse.sh '
         + join(subdir, 't1'))
     system('/home/ajoshi/BrainSuite18a/svreg/bin/svreg.sh ' +
-           join(subdir, 't1'))
+           join(subdir, 't1') + ' -S')
 
 
 def main():
