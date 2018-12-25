@@ -12,7 +12,7 @@ from nilearn.masking import compute_background_mask
 
 
 def parfun1(sub):
-    subdir = join('/big_disk/ajoshi/coding_ground/pvc_thickness/HCP_data/',
+    subdir = join('/big_disk/ajoshi/coding_ground/pvcthickness/HCP_data/',
                   sub)
     t1file = join('/data_disk/HCP_All', sub, 'T1w',
                   'T1w_acpc_dc_restore_brain.nii.gz')
@@ -33,7 +33,7 @@ def parfun1(sub):
     # make a copy of the original image
     copyfile(outt1, join(subdir, 't1.bse.nii.gz'))
 
-    system('/big_disk/ajoshi/coding_ground/pvc_thickness/cortical_extraction_nobse.sh ' + outt1)
+    system('/big_disk/ajoshi/coding_ground/pvcthickness/cortical_extraction_nobse.sh ' + outt1)
 
 
 def main():
