@@ -42,22 +42,13 @@ def parfun1(sub):
 def main():
     f = pd.read_csv('hcp_unrestricted_aajoshi_4_17_2016_14_56_18.csv')
 
-    #print(f)
-
-    print(f['Age'][0][:2])
-    print(f['Age'][0][3:])
-
     pool = Pool(processes=8)
 
     hcpsubs = list([])
 
     for i in tqdm(range(f['Age'].size)):
-        #    print(float(f['Age'][i][:2]))
         if float(f['Age'][i][:2]) > 30:
             hcpsubs.append(str(f.Subject[i]))
-        #parfun1(str(f.Subject[i]))
-    print(hcpsubs)
-    print(len(hcpsubs))
 
     r = list(tqdm(pool.imap(parfun1, hcpsubs), total=len(hcpsubs)))
 
