@@ -11,15 +11,34 @@ import numpy as np
 from nilearn.masking import compute_background_mask
 
 
-def parfun1(sub):
+def thicknessPVC(sub):
+    # cortical thickness computation
+    subbase = join('/big_disk/ajoshi/coding_ground/pvcthickness/HCP_data/',
+                   sub, 't1')
+
+    if isfile(subbase + '.right.pial.cortex.svreg.dfs'):
+        if not isfile(
+                join('/big_disk/ajoshi/coding_ground/pvcthickness/HCP_data/',
+                     sub, 'atlas.pvc-thickness_0-6mm.right.mid.cortex.dfs')):
+
+            system('/home/ajoshi/BrainSuite18a/svreg/bin/thicknessPVC.sh ' +
+                   subbase + ' >/dev/null 2>&1')
+
+
+def bstsvreg(sub):
+    # perform brainsuite and svreg processing
     subdir = join('/big_disk/ajoshi/coding_ground/pvcthickness/HCP_data/', sub)
     t1file = join('/data_disk/HCP_All', sub, 'T1w',
                   'T1w_acpc_dc_restore_brain.nii.gz')
     if not isfile(t1file):
         return
 
-    makedirs(subdir)
     outt1 = join(subdir, 't1.nii.gz')
+
+    if isfile(join(subdir, 't1.roiwise.stats.txt')):
+        return
+
+    makedirs(subdir)
 
     # compute 1mm downsampled image
     system('flirt -in ' + t1file + ' -ref ' + t1file + ' -out ' + outt1 +
@@ -50,7 +69,8 @@ def main():
         if float(f['Age'][i][:2]) > 30:
             hcpsubs.append(str(f.Subject[i]))
 
-    r = list(tqdm(pool.imap(parfun1, hcpsubs), total=len(hcpsubs)))
+    r = list(tqdm(pool.imap(bstsvreg, hcpsubs), total=len(hcpsubs)))
+    r = list(tqdm(pool.imap(thicknessPVC, hcpsubs), total=len(hcpsubs)))
 
     pool.close()
     pool.join()
