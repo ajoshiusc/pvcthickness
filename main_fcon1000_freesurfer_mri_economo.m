@@ -19,8 +19,8 @@ for j=1:length(l)
         setenv('SUBJECTNAME',l(j).name);
         subno = subno+1;
         
-        unix('mris_ca_label -t ${DATA_DIR}/lh.colortable.txt ${SUBJECTNAME} lh ${SUBJECTS_DIR}/${SUBJECTNAME}/surf/lh.sphere.reg ${DATA_DIR}/lh.economo.gcs ${SUBJECTS_DIR}/${SUBJECTNAME}/label/lh.economo.annot')
-        unix('mris_ca_label -t ${DATA_DIR}/rh.colortable.txt ${SUBJECTNAME} rh ${SUBJECTS_DIR}/${SUBJECTNAME}/surf/rh.sphere.reg ${DATA_DIR}/rh.economo.gcs ${SUBJECTS_DIR}/${SUBJECTNAME}/label/rh.economo.annot')
+        unix('mris_ca_label -t ${DATA_DIR}/lh.colortable.txt ${SUBJECTNAME} lh ${SUBJECTS_DIR}/${SUBJECTNAME}/surf/lh.sphere.reg ${DATA_DIR}/lh.economo.gcs ${SUBJECTS_DIR}/${SUBJECTNAME}/label/lh.economo.annot');
+        unix('mris_ca_label -t ${DATA_DIR}/rh.colortable.txt ${SUBJECTNAME} rh ${SUBJECTS_DIR}/${SUBJECTNAME}/surf/rh.sphere.reg ${DATA_DIR}/rh.economo.gcs ${SUBJECTS_DIR}/${SUBJECTNAME}/label/rh.economo.annot');
 
         unix('mris_anatomical_stats -a ${SUBJECTNAME}/label/lh.economo.annot -f ${SUBJECTNAME}/stats/lh.economo.stats ${SUBJECTNAME} lh');
         unix('mris_anatomical_stats -a ${SUBJECTNAME}/label/rh.economo.annot -f ${SUBJECTNAME}/stats/rh.economo.stats ${SUBJECTNAME} rh');
