@@ -1,13 +1,12 @@
-%||AUM||
-%||Shree Ganeshaya Namaha||
+
 clc;clear all;close all;
 
 addpath('/big_disk/ajoshi/freesurfer/matlab');
 
-%l = dir('/home/ajoshi/Downloads/subjects/c*');
+setenv('DATA_DIR','/ImagePTE1/ajoshi/code_farm/pvcthickness/MRI_Economo');
+
+setenv('SUBJECTS_DIR','/big_disk/ajoshi/freesurfer/subjects');
 l = dir('/big_disk/ajoshi/freesurfer/subjects/sub*');
-
-
 [ave.vertices,ave.faces]=read_surf(['/big_disk/ajoshi/freesurfer/subjects/fsaverage/surf/rh.inflated']);ave.faces=ave.faces+1;
 
 thicknessr=[];
@@ -16,20 +15,17 @@ for j=1:length(l)
     
     subdir=['/big_disk/ajoshi/freesurfer/subjects/',l(j).name];
     if exist([subdir,'/surf/rh.thickness.fwhm10.fsaverage.mgh'],'file')
-        thicknessr(:,subno)=load_mgh([subdir,'/surf/rh.thickness.fwhm10.fsaverage.mgh']);
+
+        setenv('SUBJECTNAME',l(j).name);
         subno = subno+1;
+        
+        unix('mris_ca_label -t ${DATA_DIR}/lh.colortable.txt ${SUBJECTNAME} lh ${SUBJECTS_DIR}/${SUBJECTNAME}/surf/lh.sphere.reg ${DATA_DIR}/lh.economo.gcs ${SUBJECTS_DIR}/${SUBJECTNAME}/label/lh.economo.annot')
+        unix('mris_ca_label -t ${DATA_DIR}/rh.colortable.txt ${SUBJECTNAME} rh ${SUBJECTS_DIR}/${SUBJECTNAME}/surf/rh.sphere.reg ${DATA_DIR}/rh.economo.gcs ${SUBJECTS_DIR}/${SUBJECTNAME}/label/rh.economo.annot')
+
+        unix('mris_anatomical_stats -a ${SUBJECTNAME}/label/lh.economo.annot -f ${SUBJECTNAME}/stats/lh.economo.stats ${SUBJECTNAME} lh');
+        unix('mris_anatomical_stats -a ${SUBJECTNAME}/label/rh.economo.annot -f ${SUBJECTNAME}/stats/rh.economo.stats ${SUBJECTNAME} rh');
+        
+        
         fprintf('%d/%d subjects done\n',j,length(l));
     end
 end
-
-jet1=jet(1000);
-jet1(1,:)=1;
-h=figure;
-patch('vertices',ave.vertices,'faces',ave.faces,'facevertexcdata',mean(thicknessr,2),'edgecolor','none','facecolor','interp');
-axis on;axis equal;caxis([0,4.5]);axis off;view(90,30);material dull;colormap(jet1);camlight;axis tight;
-saveas(h,'fs_avg_thickness_1_rh.png');
-view(-90,0);camlight;axis tight;
-saveas(h,'fs_avg_thickness_2_rh.png');
-
-
-
