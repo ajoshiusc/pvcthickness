@@ -13,7 +13,7 @@ thicknessr=[];
 subno=1;
 
 subjects=[];
-for j=1:30%length(l)
+for j=1:length(l)
     
     subdir=['/big_disk/ajoshi/freesurfer/subjects/',l(j).name];
     if exist([subdir,'/surf/rh.thickness.fwhm10.fsaverage.mgh'],'file')
