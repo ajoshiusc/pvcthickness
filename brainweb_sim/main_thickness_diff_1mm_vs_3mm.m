@@ -1,5 +1,3 @@
-%||AUM||
-opengl software
 clc;clear ;close all;
 restoredefaultpath;
 addpath(genpath('/ImagePTE1/ajoshi/code_farm/svreg/dev'));
