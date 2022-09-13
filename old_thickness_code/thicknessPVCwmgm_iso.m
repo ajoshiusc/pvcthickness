@@ -58,7 +58,7 @@ end
 [subbase, Thr, vox_res_comp, inner_erode_sz, gopts] = parseInputThicknessPVCwmgm(varargin);
 
 tolFactor = 1e-12;
-MaxPCGiter = 4500; % set more than 1200
+MaxPCGiter = 300;%4500; % set more than 1200
 pad_comp_vox = 10; % in unit of voxels
 face_area_thresh = (vox_res_comp^2)/3; % in mm^2
 inner_erode_sz = ceil(inner_erode_sz/vox_res_comp); % converted to voxels
