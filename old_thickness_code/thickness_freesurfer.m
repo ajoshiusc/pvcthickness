@@ -3,8 +3,8 @@ function thickness_freesurfer(subbasename)
 
 sin=readdfs([subbasename,'.inner.cortex.dfs']);
 spial=readdfs([subbasename,'.pial.cortex.dfs']);
-sin_ds = reducepatch(sin,200000);
-spial_ds = reducepatch(spial,200000);
+sin_ds = reducepatch(sin,100000);
+spial_ds = reducepatch(spial,100000);
 
 
 ind=dsearchn(spial_ds.vertices,sin.vertices);
