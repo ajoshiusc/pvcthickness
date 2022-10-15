@@ -19,18 +19,18 @@ pth3mm='/home/ajoshi/brainweb/3mm'
 
 
 
-tic
-thicknessMLI(subbasename1mm);
-toc
-map_MLIthickness2atlas(subbasename1mm);
-%map_fsthickness2atlas(subbasename1mm);
-toc
-thicknessMLI(subbasename3mm);
-toc
-map_MLIthickness2atlas(subbasename3mm);
-
-%map_fsthickness2atlas(subbasename3mm);
-toc 
+% tic
+% thicknessMLI(subbasename1mm);
+% toc
+% map_MLIthickness2atlas(subbasename1mm);
+% %map_fsthickness2atlas(subbasename1mm);
+% toc
+% thicknessMLI(subbasename3mm);
+% toc
+% map_MLIthickness2atlas(subbasename3mm);
+% 
+% %map_fsthickness2atlas(subbasename3mm);
+% toc 
 
 
 
