@@ -31,8 +31,8 @@ atlas_r=readdfsGz([atlasbasename,'.right.mid.cortex.dfs']);
 
 
 for jj=1:length(lst)
-    subbasename=['/big_disk/ajoshi/fcon_1000/Beijing/',lst(jj).name, '/anat/atlas'];
-    if (exist(['/big_disk/ajoshi/fcon_1000/Beijing/',lst(jj).name, '/anat/atlas_fs_thickness.left.mid.cortex.svreg.dfs'],'file') )
+    subbasename=['/big_disk/ajoshi/fcon_1000/Beijing/',lst(jj).name, '/anat/BST/atlas'];
+    if (exist(['/big_disk/ajoshi/fcon_1000/Beijing/',lst(jj).name, '/anat/BST/atlas_fs_thickness.left.mid.cortex.svreg.dfs'],'file') )
         aa1=aa1+1;
         %split_thickness_map(['/big_disk/ajoshi/fcon_1000/Beijing/',lst(jj).name, '/mprage_anonymized']);
         s=readdfs([subbasename, '_fs_thickness.left.mid.cortex.svreg.dfs']);
@@ -88,6 +88,7 @@ view_patch_economo(smidltarc,avg_thickness_mappedlsmc);
 saveas(h,'avg_thickness_mappedl_fs_method.fig');
 view(-90,30);camlight('headlight');material dull;
 saveas(h,'avg_thickness_mappedl_1_fs_method.png');
+
 view(90,0);camlight('headlight');material dull;
 saveas(h,'avg_thickness_mappedl_2_fs_method.png');
 
