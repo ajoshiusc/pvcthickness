@@ -34,10 +34,19 @@ cc.vertices(ia,1)=[vvv1(1:end-1,1)];
 ss{1}=s;ss{2}=cc;
 sc=combine_surf1(ss);
 
-[~,~,ia]=intersect(s.vertices,sc.vertices,'rows','stable');
-std_thrc=zeros(length(sc.vertices),1);
-std_thrc(ia)=so.attributes;
-sc.attributes=std_thrc;
+
+if isfield(so,'attributes')
+    [~,~,ia]=intersect(s.vertices,sc.vertices,'rows','stable');
+    std_thrc=zeros(length(sc.vertices),1);
+    std_thrc(ia)=so.attributes;
+    sc.attributes=std_thrc;
+
+end
+
+
+
+
+
 
 
 function sur=combine_surf1(s)
