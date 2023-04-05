@@ -28,6 +28,6 @@ hst_fs=histc(diff_fs,edg); plot(edg,hst_fs,'m','LineWidth',2);
 hst_ld=histc(diff_ld,edg); plot(edg,hst_ld,'b','LineWidth',2);%,'linestyle',':');
 hst_MLI=histc(diff_MLI,edg); plot(edg,hst_MLI,'k','LineWidth',2);%,'linestyle',':');
 
-legend('ALE','ISO','FS','LD','MLI');
+legend('ADE','ISO','FS','LD','MLI');
 
 
