@@ -1,6 +1,7 @@
 *.mat
 *.asv
-
+fs_data/
+hires_lowres_comparison/
 HCP_data
 *.pkl
 *logs*
