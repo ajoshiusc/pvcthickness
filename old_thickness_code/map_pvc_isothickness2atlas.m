@@ -1,6 +1,6 @@
 function map_pvc_isothickness2atlas(subbasename)        
 
-        s=readdfs([subbasename,'.pvc_iso-thickness_0-6mm.mid.cortex.dfs']);
+        s=readdfs([subbasename,'.iso-thickness_0-6mm.mid.cortex.dfs']);
         smid=readdfs([subbasename,'.inner.cortex.dfs']);
         %s.attributes(s.attributes>7)=7;
         smidl=readdfs([subbasename,'.left.inner.cortex.svreg.dfs']);
