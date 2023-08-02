@@ -31,6 +31,7 @@ sin=readdfs([subbasename3mm,'.left.inner.cortex.svreg.dfs']);
 spial=readdfs([subbasename3mm,'.left.pial.cortex.svreg.dfs']);
 ld = sqrt(sum((sin.vertices - spial.vertices).^2,2));
 
+
 sub=readdfs([subbasename3mm,'.left.mid.cortex.svreg.dfs']);
 %smooth_surf_function(sl,sl.attributes);
 thickness_3mm = ld;
@@ -47,12 +48,13 @@ sl = readdfs('/home/ajoshi/projects/pvcthickness/hires_lowres_comparison/lowres_
 sl.attributes = abs(ld_3mm - ld_1mm);
 sl.attributes=smooth_surf_function(sl,sl.attributes);
 
+sl.attributes = 0.75*sl.attributes/5;
 
 h=figure;
 
 patch('vertices',sl.vertices,'faces',sl.faces,'facevertexcdata',sl.attributes,'facecolor','interp','edgecolor','none');
 axis equal;axis off;camlight;axis tight;
-caxis([0,5]);colormap jet;
+caxis([0,.75]);colormap jet;
  view(-90,0);camlight('headlight'); material dull;
  saveas(h,'LD_left_hires_lowres_1.png')
 view(90,0);camlight('headlight'); 

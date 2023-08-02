@@ -7,22 +7,22 @@ addpath(genpath('/home/ajoshi/projects/BrainSuite/svreg/3rdParty'));
 addpath(genpath('/home/ajoshi/projects/BrainSuite/svreg/src'));
 addpath(genpath('/home/ajoshi/projects/pvcthickness/old_thickness_code'));
 
-pth_hires='/home/ajoshi/projects/pvcthickness/fs_data/BCI-DNI_brain'
-pth_lowres='/home/ajoshi/projects/pvcthickness/fs_data/BCI-DNI_brain_1mm'
+pth_hires='/home/ajoshi/projects/pvcthickness/fs_data/BCI-DNI_brain.july2023'
+pth_lowres='/home/ajoshi/projects/pvcthickness/fs_data/BCI-DNI_brain_1mm.july2023'
 
 addpath(genpath('/home/ajoshi/projects/pvcthickness/fs_data/matlab'));
 [ave_sp.vertices,ave_sp.faces]=read_surf(['/home/ajoshi/projects/pvcthickness/fs_data/fsaverage/surf/lh.sphere.reg']);ave_sp.faces=ave_sp.faces+1;
 [sl.vertices,sl.faces]=read_surf(['/home/ajoshi/projects/pvcthickness/fs_data/fsaverage/surf/lh.inflated']);sl.faces=sl.faces+1;
 
 
-thickness_hires=load_mgh([pth_hires,'/surf/lh.thickness.fwhm25.fsaverage.mgh']);
-thickness_lowres=load_mgh([pth_lowres,'/surf/lh.thickness.fwhm25.fsaverage.mgh']);
+thickness_hires=load_mgh([pth_hires,'/surf/lh.thickness.fwhm5.fsaverage.mgh']);
+thickness_lowres=load_mgh([pth_lowres,'/surf/lh.thickness.fwhm5.fsaverage.mgh']);
 
 
 
 
 sl.attributes = abs(thickness_hires - thickness_lowres);
-%sl.attributes=smooth_surf_function(sl,sl.attributes);
+sl.attributes=smooth_surf_function(sl,sl.attributes);
 
 
 h=figure;

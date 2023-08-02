@@ -12,22 +12,23 @@ diff_pvc = pvc.sl.attributes;
 iso=load('3mm_1mm_left_iso.mat');
 diff_iso = iso.sl.attributes;
 
-fs=load('3mm_1mm_left_fs.mat');
+fs=load('3mm_1mm_left_fs2.mat');
 diff_fs = fs.sl.attributes;
+diff_fs(diff_fs<.1)=[];
 
 MLI=load('3mm_1mm_left_MLI.mat');
 diff_MLI = MLI.sl.attributes;
 
 
 
-edg=linspace(0,6,100);
+edg=linspace(0,1,100);
 h=figure;
 hst_pvc=histc(diff_pvc,edg); plot(edg,hst_pvc,'r','LineWidth',2);hold on;
-hst_iso=histc(diff_iso,edg); plot(edg,hst_iso,'g','LineWidth',2);
-hst_fs=histc(diff_fs,edg); plot(edg,hst_fs,'m','LineWidth',2);
-hst_ld=histc(diff_ld,edg); plot(edg,hst_ld,'b','LineWidth',2);%,'linestyle',':');
-hst_MLI=histc(diff_MLI,edg); plot(edg,hst_MLI,'k','LineWidth',2);%,'linestyle',':');
+hst_iso=histc(diff_iso,edg); plot(edg,hst_iso,'g','LineWidth',2,'linestyle','-.');
+hst_fs=histc(diff_fs,edg); plot(edg,2.5*hst_fs,'k','LineWidth',2,'linestyle','-.');
+hst_ld=histc(diff_ld,edg); plot(edg,hst_ld,'b','LineWidth',2,'linestyle',':');%,'linestyle',':');
+%hst_MLI=histc(diff_MLI,edg); plot(edg,hst_MLI,'k','LineWidth',2);%,'linestyle',':');
 
-legend('ADE','ISO','FS','LD','MLI');
+legend('ADE','ISO','FS','LD');%,'MLI');
 
 

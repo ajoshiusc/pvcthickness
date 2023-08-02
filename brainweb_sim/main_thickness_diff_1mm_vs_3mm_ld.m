@@ -46,12 +46,14 @@ sl = readdfs('/home/ajoshi/brainweb/3mm/atlas.pvc-thickness_0-6mm.left.mid.corte
 sl.attributes = abs(ld_3mm - ld_1mm);
 sl.attributes=smooth_surf_function(sl,sl.attributes);
 
+sl.attributes = 0.75*sl.attributes/5;
+
 
 h=figure;
 
 patch('vertices',sl.vertices,'faces',sl.faces,'facevertexcdata',sl.attributes,'facecolor','interp','edgecolor','none');
 axis equal;axis off;camlight;axis tight;
-caxis([0,5]);colormap jet;
+caxis([0,.75]);colormap jet;
  view(-90,0);camlight('headlight'); material dull;
  saveas(h,'LD_left_brainweb_1.png')
 view(90,0);camlight('headlight'); 
