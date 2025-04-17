@@ -44,6 +44,7 @@ def bstsvreg(subbasename):
             exe_name = "/home/ajoshi/Projects/pvcthickness/cortical_extraction_nobse_local.sh"
         
         system(f"{exe_name} {subbasename}")
+        #system(f"sbatch run_script.sh \'{exe_name} {subbasename}\'")
 
     if not isfile('' + subbasename + '.right.pial.cortex.svreg.dfs'):
         # run svreg
@@ -52,6 +53,7 @@ def bstsvreg(subbasename):
             exe_name = "/home/ajoshi/Software/BrainSuite21a/svreg/bin/svreg.sh"
 
         system(f"{exe_name} {subbasename}")
+        #system(f"sbatch run_script.sh \'{exe_name} {subbasename}\'")
 
 
 def main():
