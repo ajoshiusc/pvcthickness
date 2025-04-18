@@ -36,6 +36,7 @@ def thicknessPVC(sub):
 
 
 def bstsvreg(subbasename):
+
     # run brainsuite and svreg on the original image
     if not isfile('' + subbasename + '.right.pial.cortex.dfs'):
         # perform brainsuite and svreg processing
@@ -48,12 +49,16 @@ def bstsvreg(subbasename):
 
     if not isfile('' + subbasename + '.right.pial.cortex.svreg.dfs'):
         # run svreg
-        exe_name = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build9900_linux/bin/svreg.sh"
+        exe_name = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build0001_linux/bin/svreg.sh"
+        atlasbasename = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build0001_linux/BCI-DNI_brain_atlas/BCI-DNI_brain"
+
         if not os.path.isfile(exe_name):
             exe_name = "/home/ajoshi/Software/BrainSuite21a/svreg/bin/svreg.sh"
+            atlasbasename = "/home/ajoshi/Software/BrainSuite21a/svreg/BCI-DNI_brain_atlas/BCI-DNI_brain"
+
 
         #system(f"module load matlab/2024a; export BrainSuiteMCR=/apps/generic/matlab/2024a/; {exe_name} {subbasename}")
-        #system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job \'{exe_name} {subbasename}\'")
+        system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job \'{exe_name} {subbasename} {atlasbasename} -S\'")
 
 
 def main():
@@ -110,7 +115,7 @@ def main():
             "T1w_acpc_dc_restore_brain.nii.gz",
         )
         outdir_sub = join(outdir, sub)
-        if isfile(t1file):
+        if isfile(t1file) and not isfile(join(outdir_sub, "orig", "t1.mask.nii.gz")):
             copyfile(t1file, join(outdir_sub, "orig", "t1.nii.gz"))
             copyfile(t1bsefile, join(outdir_sub, "orig", "t1.bse.nii.gz"))
             # make a brain mask
