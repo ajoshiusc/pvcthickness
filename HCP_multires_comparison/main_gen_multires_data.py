@@ -43,17 +43,17 @@ def bstsvreg(subbasename):
         if not os.path.isfile(exe_name):
             exe_name = "/home/ajoshi/Projects/pvcthickness/cortical_extraction_nobse_local.sh"
         
-        system(f"{exe_name} {subbasename}")
-        #system(f"sbatch run_script.sh \'{exe_name} {subbasename}\'")
+        #system(f"{exe_name} {subbasename}")
+        system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job \'{exe_name} {subbasename}\'")
 
     if not isfile('' + subbasename + '.right.pial.cortex.svreg.dfs'):
         # run svreg
-        exe_name = "/home1/ajoshi/Projects/pvcthickness/svreg.sh"
+        exe_name = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build9900_linux/bin/svreg.sh"
         if not os.path.isfile(exe_name):
             exe_name = "/home/ajoshi/Software/BrainSuite21a/svreg/bin/svreg.sh"
 
-        system(f"{exe_name} {subbasename}")
-        #system(f"sbatch run_script.sh \'{exe_name} {subbasename}\'")
+        #system(f"module load matlab/2024a; export BrainSuiteMCR=/apps/generic/matlab/2024a/; {exe_name} {subbasename}")
+        #system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job \'{exe_name} {subbasename}\'")
 
 
 def main():
@@ -133,6 +133,7 @@ def main():
                     target_affine=np.eye(3) * float(res[:-2]),
                     interpolation="nearest",
                     force_resample=True,
+                    copy_header=True,
                 ).to_filename(join(outdir_res, "t1.nii.gz"))
 
             if not isfile(join(outdir_res, "t1.bse.nii.gz")):
@@ -141,10 +142,11 @@ def main():
                     target_affine=np.eye(3) * float(res[:-2]),
                     interpolation="nearest",
                     force_resample=True,
+                    copy_header=True,
                 ).to_filename(join(outdir_res, "t1.bse.nii.gz"))
 
                 # make a brain mask
-                msk = compute_background_mask(t1file)
+                msk = compute_background_mask(join(outdir_res, "t1.bse.nii.gz"))
                 msk.to_filename(join(outdir_res, "t1.mask.nii.gz"))
 
     # run brainsuite and svreg on all the images

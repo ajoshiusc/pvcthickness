@@ -6,6 +6,8 @@
 #SBATCH --time=47:00:00
 #SBATCH --account=ajoshi_1183
 
+module load matlab/2024a; 
+export BrainSuiteMCR=/apps/generic/matlab/2024a/;
 
 echo "Running: " $1
 

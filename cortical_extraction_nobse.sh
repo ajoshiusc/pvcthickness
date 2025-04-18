@@ -13,7 +13,7 @@ fi
 # Override this if you want to call the script in a different directory than the binaries reside
 # This may have to be hardcoded to work on an SGE grid. You can also set an environment variable to do this.
 
-BrainSuiteDir=/home/ajoshi/BrainSuite18a
+BrainSuiteDir=/project/ajoshi_27/BrainSuite21a
 
 if [ -z $BrainSuiteDir ]; then
 	BrainSuiteDir=$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )")
