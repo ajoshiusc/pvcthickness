@@ -15,30 +15,10 @@ import glob
 import os
 
 
-def thicknessPVC(sub):
-    # cortical thickness computation
-    subbase = join("/big_disk/ajoshi/coding_ground/pvcthickness/HCP_data/", sub, "t1")
-
-    if isfile(subbase + ".right.pial.cortex.svreg.dfs"):
-        if not isfile(
-            join(
-                "/big_disk/ajoshi/coding_ground/pvcthickness/HCP_data/",
-                sub,
-                "atlas.pvc-thickness_0-6mm.right.mid.cortex.dfs",
-            )
-        ):
-
-            system(
-                "/home/ajoshi/BrainSuite18a/svreg/bin/thicknessPVC.sh "
-                + subbase
-                + " >/dev/null 2>&1"
-            )
-
-
 def bstsvreg(subbasename):
 
     # run brainsuite and svreg on the original image
-    if not isfile('' + subbasename + '.right.pial.cortex.dfs'):
+    if 0: #not isfile(subbasename + '.right.pial.cortex.dfs'):
         # perform brainsuite and svreg processing
         exe_name = "/home1/ajoshi/Projects/pvcthickness/cortical_extraction_nobse.sh"
         if not os.path.isfile(exe_name):
@@ -47,7 +27,7 @@ def bstsvreg(subbasename):
         #system(f"{exe_name} {subbasename}")
         system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job \'{exe_name} {subbasename}\'")
 
-    if not isfile('' + subbasename + '.right.pial.cortex.svreg.dfs'):
+    if 0: #not isfile(subbasename + '.right.pial.cortex.svreg.dfs'):
         # run svreg
         exe_name = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build0001_linux/bin/svreg.sh"
         atlasbasename = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build0001_linux/BCI-DNI_brain_atlas/BCI-DNI_brain"
@@ -59,6 +39,20 @@ def bstsvreg(subbasename):
 
         #system(f"module load matlab/2024a; export BrainSuiteMCR=/apps/generic/matlab/2024a/; {exe_name} {subbasename}")
         system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job \'{exe_name} {subbasename} {atlasbasename} -S\'")
+
+    if isfile(subbasename + '.right.pial.cortex.svreg.dfs') and not isfile(subbasename + '.pvc-thickness_0-6mm.right.mid.cortex.dfs'):
+
+        # run thicknessPVC
+        exe_name = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build0001_linux/bin/thicknessPVC.sh"
+        atlasbasename = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build0001_linux/BCI-DNI_brain_atlas/BCI-DNI_brain"
+
+        if not os.path.isfile(exe_name):
+            exe_name = "/home/ajoshi/Software/BrainSuite21a/svreg/bin/thicknessPVC.sh"
+            atlasbasename = "/home/ajoshi/Software/BrainSuite21a/svreg/BCI-DNI_brain_atlas/BCI-DNI_brain"
+
+
+        #system(f"module load matlab/2024a; export BrainSuiteMCR=/apps/generic/matlab/2024a/; {exe_name} {subbasename}")
+        system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job \'{exe_name} {subbasename}\'")
 
 
 def main():
