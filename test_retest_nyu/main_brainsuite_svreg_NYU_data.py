@@ -53,13 +53,29 @@ def bstsvreg(subbasename):
         system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job \'{exe_name} {subbasename}\'")
 
 
+    if isfile(subbasename + '.pvc-thickness_0-6mm.right.mid.cortex.dfs') and not isfile(subbasename[-2] + 'atlas.pvc-thickness_0-6mm.right.mid.cortex.dfs'):
+
+        # run svreg_thickness2atlas
+        exe_name = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build0001_linux/bin/svreg_thickness2atlas.sh"
+        atlasbasename = "/home1/ajoshi/Projects/SVRegSource000/compile_scripts/svreg_99_build0001_linux/BCI-DNI_brain_atlas/BCI-DNI_brain"
+
+        if not os.path.isfile(exe_name):
+            exe_name = "/home/ajoshi/Software/BrainSuite21a/svreg/bin/svreg_thickness2atlas.sh"
+            atlasbasename = "/home/ajoshi/Software/BrainSuite21a/svreg/BCI-DNI_brain_atlas/BCI-DNI_brain"
+
+
+        #system(f"module load matlab/2024a; export BrainSuiteMCR=/apps/generic/matlab/2024a/; {exe_name} {subbasename}")
+        system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job \'{exe_name} {subbasename}\'")
+    
+
+
 
 
 
 
 def main():
 
-    session = '1b'
+    session = '3b'
     nyu_proj1183 = f"/project/ajoshi_1183/nyu_data/NYU_TRT_session{session}"
     outdir = join(f"/project/ajoshi_1183/NYU_data_test_retest/{session}")
 
