@@ -47,7 +47,7 @@ def main():
     # make output dirs for 4 different resolutions, orig, 1mm, 2mm, 3mm
     
     
-    hcpsubs = hcpsubs[2:4]
+    hcpsubs = hcpsubs[8:10]
 
     for sub in tqdm(hcpsubs):
         outdir_sub = join(outdir, sub)

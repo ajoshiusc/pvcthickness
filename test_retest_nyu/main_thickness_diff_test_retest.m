@@ -15,7 +15,7 @@ thickness_right = min(max(sr.attributes,0),1);
 
 sl.attributes = abs(thickness_left)
 
-pvc_val = 2* sl.attributes
+pvc_val = 2*sl.attributes
 pvc_val=smooth_surf_function(sl,pvc_val);
 
 Tl=triangulation(sl.faces,sl.vertices);
@@ -41,8 +41,8 @@ h=figure;
 patch('vertices',slc.vertices,'faces',slc.faces,'facevertexcdata',(pvc_valc),'edgecolor','none','facecolor','interp');
 axis on;axis equal;caxis([0,2]);axis off;
 view(90,0);camlight('headlight');material dull;
-saveas(h,'thickness_PVC_left1.png');
-autocrop_img('thickness_PVC_left1.png');
+saveas(h,'thickness3_PVC_left1.png');
+autocrop_img('thickness3_PVC_left1.png');
 view(-90,0);camlight('headlight');material dull;
 saveas(h,'thickness3_PVC_left2.png');
 autocrop_img('thickness3_PVC_left2.png');
@@ -51,7 +51,7 @@ autocrop_img('thickness3_PVC_left2.png');
 
 % plot right hemisphere
 
-pvc_val = 2*sr.attributes
+pvc_val = 2* sr.attributes
 pvc_val=smooth_surf_function(sr,pvc_val);
 
 Tl=triangulation(sr.faces,sr.vertices);
@@ -77,8 +77,8 @@ h=figure;
 patch('vertices',src.vertices,'faces',src.faces,'facevertexcdata',(pvc_valc),'edgecolor','none','facecolor','interp');
 axis on;axis equal;caxis([0,2]);axis off;
 view(90,0);camlight('headlight');material dull;
-saveas(h,'thickness_PVC_right1.png');
-autocrop_img('thickness_PVC_right1.png');
+saveas(h,'thickness3_PVC_right1.png');
+autocrop_img('thickness3_PVC_right1.png');
 view(-90,0);camlight('headlight');material dull;
 saveas(h,'thickness3_PVC_right2.png');
 autocrop_img('thickness3_PVC_right2.png');
