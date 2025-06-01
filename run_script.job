@@ -8,8 +8,10 @@
 
 module load matlab/2024a; 
 export BrainSuiteMCR=/apps/generic/matlab/2024a/;
+export FREESURFER_HOME=/scratch1/ajoshi/freesurfer
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 echo "Running: " $1
 
-$1
+#$1
 

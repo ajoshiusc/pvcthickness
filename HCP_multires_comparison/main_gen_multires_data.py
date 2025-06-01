@@ -187,6 +187,35 @@ def main():
             continue
         bstsvreg(t1file.replace(".nii.gz", ""))
 
+    # run freesurfer reconall and thicknesscomputation on all the images
+    for sub in hcpsubs:
+        outdir_sub = join(outdir, sub)
+        t1file = join(outdir_sub, "orig", "t1.nii.gz")
+        if not isfile(t1file):
+            continue
+        # run freesurfer recon-all on the original image
+        system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job 'recon-all -s {sub}_orig -i {t1file} -make all -qcache'")
+
+        # run freesurfer recon-all on the 1mm image
+        t1file = join(outdir_sub, "1mm", "t1.nii.gz")
+        if not isfile(t1file):
+            continue
+        system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job 'recon-all -s {sub}_1mm -i {t1file} -make all -qcache'")
+
+        # run freesurfer recon-all on the 2mm image
+        t1file = join(outdir_sub, "2mm", "t1.nii.gz")
+        if not isfile(t1file):
+            continue
+        system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job 'recon-all -s {sub}_2mm -i {t1file} -make all -qcache'")
+
+        # run freesurfer recon-all on the 3mm image
+        t1file = join(outdir_sub, "3mm", "t1.nii.gz")
+        if not isfile(t1file):
+            continue
+        system(f"sbatch /home1/ajoshi/Projects/pvcthickness/run_script.job 'recon-all -s {sub}_3mm -i {t1file}  -make all -qcache'")
+
+
+
 
 if __name__ == "__main__":
     main()
